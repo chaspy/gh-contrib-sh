@@ -32,9 +32,9 @@ main() {
   if [[ $TOKEN != "" ]]; then
     AUTH="Authorization: token ${TOKEN}"
   fi
-
+  TERMS="$START".."$END"
   JSON=`curl -sS -H "$AUTH" "${URL}?q=type:pr+in:body+is:merged+merged:${TERMS}+author:${AUTHOR}&per_page=100"`
-  NUM=`echo $JSON | jq ".items[].title" | wc -l`
+  NUM=`echo $JSON | jq ".items[].title" | wc -l | tr -d ' '`
   PR=`echo $JSON | jq -c '.items[] | {title,html_url} | .html_url |= . + "\n" ' \
                  | jq -c 'sort_by(.html_url) | .[]' --slurp \
                  | jq -r .[]`
