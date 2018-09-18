@@ -12,13 +12,14 @@ EOS
 }
 
 parse_args() {
-  while getopts "u:s:e:" OPT; do
+  while getopts "u:s:e:h" OPT; do
     case $OPT in
       u) AUTHOR="$OPTARG" ;;
       s) START="$OPTARG" ;;
       e) END="$OPTARG" ;;
-      :) echo  "[ERROR] Option argument is undefined.";;
-      \?) echo "[ERROR] Undefined options.";;
+      h) usage ;;
+      :) echo  "[ERROR] Option argument is undefined." && usage;;
+      \?) echo "[ERROR] Undefined options." && usage;;
     esac
   done
 
