@@ -1,6 +1,4 @@
 #!/bin/bash
-set -x
-
 readonly URL="https://api.github.com/search/issues"
 
 usage() {
